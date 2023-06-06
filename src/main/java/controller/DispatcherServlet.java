@@ -24,7 +24,7 @@ public class DispatcherServlet extends HttpServlet {
     	mapping = new HandlerMapping();
     }
 
-	/**
+	/*
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -6,13 +6,29 @@
     <meta charset="UTF-8">
     <title>병주도서관</title>
     <style>
-        
+        #title{
+        	background-color: black;
+        	height: 110px;
+        	position: absolute;
+        	top: 0px;
+        	left: -5px;
+        	
+        }
+        #logo{
+        	width: 135px;
+        	height: 110px;
+        }
+        #login{
+        position: absolute;
+        right: 200px;
+        top : 20px;
+        }
     </style>
 </head>
 <body>
     <header>
         <div id="title">
-        <img alt="" src="/img/logo.png">
+            <img alt="" src="logo.png" id = "logo">
         </div>
     </header>
     
@@ -25,7 +41,7 @@
         
         <c:choose>
             <c:when test="${empty user}">
-                <h1><a href="/WebMyLibProject/login.do">로그인</a></h1>
+                <h1><a href="/WebMyLibProject/login.do" id="login">로그인</a></h1>
                 <h3>
                     <a href="/WebMyLibProject/searchId.do">아이디 찾기</a>
                     <a href="/WebMyLibProject/searchPassword.do">비밀번호 찾기</a>
