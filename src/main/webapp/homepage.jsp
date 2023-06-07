@@ -12,16 +12,42 @@
         	position: absolute;
         	top: 0px;
         	left: -5px;
-        	
         }
         #logo{
         	width: 135px;
         	height: 110px;
         }
         #login{
-        position: absolute;
-        right: 200px;
-        top : 20px;
+	        position: absolute;
+	        right: 200px;
+	        top : 20px;
+        }
+        #searchID{
+	        position: absolute;
+	        right: 70px;
+	        top : 20px;
+        }
+        #searchPassword{
+	        position: absolute;
+	        right: 70px;
+	        top : 50px;
+        }
+        .user-info{
+        	position: absolute;
+        	right: 70px;
+        	top: 20px;
+        }
+        
+        #totalSearch{
+	        position: absolute;
+	        right: 150px;
+	        top : 50px;
+        }
+        
+        #logout{
+	        position: absolute;
+	        right: 70px;
+	        top : 50px;
         }
     </style>
 </head>
@@ -41,17 +67,16 @@
         
         <c:choose>
             <c:when test="${empty user}">
-                <h1><a href="/WebMyLibProject/login.do" id="login">로그인</a></h1>
+                <h3><a href="/WebMyLibProject/login.do" id="login">로그인</a></h3>
                 <h3>
-                    <a href="/WebMyLibProject/searchId.do">아이디 찾기</a>
-                    <a href="/WebMyLibProject/searchPassword.do">비밀번호 찾기</a>
-                    <a href="/WebMyLibProject/insertUser.do">회원가입</a>
+                    <a href="/WebMyLibProject/searchId.do" id = "searchID">아이디 찾기</a>
+                    <a href="/WebMyLibProject/searchPassword.do" id = "searchPassword">비밀번호 찾기</a>
                 </h3>
             </c:when>
             <c:otherwise>
                 <span class="user-info">${user.name}(${user.id})님</span>
-                <a href="/WebMyLibProject/getBookList.do">통합검색</a>
-                <a href="/WebMyLibProject/logout.do">로그아웃</a>
+                <a href="/WebMyLibProject/totalSearch.do" id = "totalSearch">통합검색</a>
+                <a href="/WebMyLibProject/logout.do" id = "logout">로그아웃</a>
             </c:otherwise>
         </c:choose>
     </section>

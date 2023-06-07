@@ -3,8 +3,9 @@ package controller;
 import java.util.HashMap;
 import java.util.Map;
 
-import controller.book.GetBookListController;
+import controller.book.BookSearchController;
 import controller.homepage.HomepageController;
+import controller.search.TotalSearchController;
 import controller.user.InsertUserController;
 import controller.user.LoginController;
 import controller.user.LogoutController;
@@ -18,7 +19,8 @@ public class HandlerMapping {
 			mappings.put("/insertUser.do", new InsertUserController());
 			mappings.put("/login.do", new LoginController());
 			mappings.put("/logout.do", new LogoutController());
-			mappings.put("/getBookList.do", new GetBookListController());
+			mappings.put("/totalSearch.do", new TotalSearchController());
+			mappings.put("/bookTotalSearch.do", new BookSearchController());
 		}
 		public Controller getController(String path) {
 			return mappings.get(path);
