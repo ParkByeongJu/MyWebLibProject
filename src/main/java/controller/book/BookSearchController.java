@@ -19,6 +19,8 @@ public class BookSearchController implements Controller{
         vo.setName(name);
         vo.setWriter(name);
         vo.setPublisher(name);
+        vo.setPublicationDate(name);
+        vo.setGenre(name);
 
         BookDAO dao = new BookDAO();
         List<String> nameResults = dao.searchName(vo);

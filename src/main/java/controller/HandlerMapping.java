@@ -5,6 +5,7 @@ import java.util.Map;
 
 import controller.book.BookSearchController;
 import controller.homepage.HomepageController;
+import controller.rentalbook.RentalReturnBookController;
 import controller.search.TotalSearchController;
 import controller.user.InsertUserController;
 import controller.user.LoginController;
@@ -21,6 +22,7 @@ public class HandlerMapping {
 			mappings.put("/logout.do", new LogoutController());
 			mappings.put("/totalSearch.do", new TotalSearchController());
 			mappings.put("/bookTotalSearch.do", new BookSearchController());
+			mappings.put("/rentalReturn.do", new RentalReturnBookController());
 		}
 		public Controller getController(String path) {
 			return mappings.get(path);

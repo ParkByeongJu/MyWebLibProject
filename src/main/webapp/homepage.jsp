@@ -4,81 +4,150 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>병주도서관</title>
-    <style>
-        #title{
-        	background-color: black;
-        	height: 110px;
-        	position: absolute;
-        	top: 0px;
-        	left: -5px;
+    <title>도서관 홈페이지</title>
+     <style>
+        /* 전체 페이지 스타일 */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* 헤더 스타일 */
+        header {
+            background-color: black;
+            color: #fff;
+            padding: 20px;
         }
         #logo{
-        	width: 135px;
-        	height: 110px;
+        	width: 170px; 
+        	height: 100px;
+        	
         }
-        #login{
-	        position: absolute;
-	        right: 200px;
-	        top : 20px;
+
+        /* 네비게이션 스타일 */
+        nav {
+            background-color: #555;
+            color: #fff;
+            padding: 10px;
+            height: 50px;
         }
-        #searchID{
-	        position: absolute;
-	        right: 70px;
-	        top : 20px;
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
         }
-        #searchPassword{
-	        position: absolute;
-	        right: 70px;
-	        top : 50px;
+
+        nav ul li {
+            display: inline;
+            margin-right: 10px;
         }
-        .user-info{
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+        
+        #home{
         	position: absolute;
-        	right: 70px;
-        	top: 20px;
+        	left: 590px;
+        	font-size: 20pt;
         }
         
         #totalSearch{
-	        position: absolute;
-	        right: 150px;
-	        top : 50px;
+        	position: absolute;
+        	left: 700px;
+        	font-size: 20pt;
         }
         
-        #logout{
-	        position: absolute;
-	        right: 70px;
-	        top : 50px;
+		#login{
+			position: absolute;
+			left: 900px;
+			font-size: 20pt;
+		}
+
+		#logout{
+			position: absolute;
+			left: 900px;
+			font-size: 20pt;
+		}
+		
+		#qa{
+			position: absolute;
+			left: 1100px;
+			font-size: 20pt;
+		}
+        /* 메인 콘텐츠 스타일 */
+        main {
+            padding: 100px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        #middlelogin{
+        position: absolute;
+        left: 1500px;
+        }
+        /* 푸터 스타일 */
+        footer {
+            background-color: black;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
         }
     </style>
 </head>
 <body>
     <header>
-        <div id="title">
-            <img alt="" src="logo.png" id = "logo">
-        </div>
+        <img alt="" src="logo.png" id = "logo">
     </header>
     
-    <section>
-    	
-        <c:if test="${user.role == 'admin'}">
+    <nav>
+        <ul>
+        	<c:choose>
+	        	<c:when test="${empty user }">
+		            <li><a href="/WebMyLibProject/homepage.do" id="home">홈</a></li>
+		            <li><a href="/WebMyLibProject/login.do" id="login">로그인</a></li>
+		            <li><a href="/WebMyLibProject/totalSearch.do" id="totalSearch">통합검색</a></li>
+		            <li><a href="contact.html" id="qa">문의</a></li>
+	            </c:when>
+	            <c:otherwise>
+		            <li><a href="/WebMyLibProject/homepage.do" id="home">홈</a></li>
+		            <li><a href="/WebMyLibProject/logout.do" id = "logout">로그아웃</a></li>
+		            <li><a href="/WebMyLibProject/totalSearch.do" id = "totalSearch">통합검색</a></li>
+		            <li><a href="/WebMyLibProject/rentalReturn.do" id = "rentalReturn">대출/반납</a></li>
+		            <li><a href="contact.html" id="qa">문의</a></li>
+	            </c:otherwise>
+        	</c:choose>
+        </ul>
+    </nav>
+    
+    <main>
+        <h2>도서 목록</h2>
+        <!-- 도서 목록을 표시하는 내용을 추가합니다. -->
+    
+    
+    <c:if test="${user.role == 'admin'}">
             <a href="/WebMyLibProject/Addbook.do">책입고</a>
             <a href="/WebMyLibProject/DeleteBook.do">책삭제</a>
         </c:if>
-        
-        <c:choose>
+     <c:choose>
             <c:when test="${empty user}">
-                <h3><a href="/WebMyLibProject/login.do" id="login">로그인</a></h3>
-                <h3>
-                    <a href="/WebMyLibProject/searchId.do" id = "searchID">아이디 찾기</a>
-                    <a href="/WebMyLibProject/searchPassword.do" id = "searchPassword">비밀번호 찾기</a>
-                </h3>
+                <h3><a href="/WebMyLibProject/login.do" id="middlelogin">로그인</a></h3>
             </c:when>
             <c:otherwise>
                 <span class="user-info">${user.name}(${user.id})님</span>
                 <a href="/WebMyLibProject/totalSearch.do" id = "totalSearch">통합검색</a>
+                <a href="/WebMyLibProject/rentalReturn.do" id = "rentalReturn">대출/반납</a>
                 <a href="/WebMyLibProject/logout.do" id = "logout">로그아웃</a>
-            </c:otherwise>
-        </c:choose>
-    </section>
+      </c:otherwise>
+    </c:choose>
+    </main>
+    <footer>
+        <p>&copy; 2023 도서관. All rights reserved.</p>
+    </footer>
 </body>
 </html>

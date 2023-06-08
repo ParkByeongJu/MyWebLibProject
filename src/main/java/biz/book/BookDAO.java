@@ -30,6 +30,8 @@ public class BookDAO {
 				books.add(rs.getString("name"));
 				books.add(rs.getString("writer"));
 				books.add(rs.getString("publisher"));
+				books.add(rs.getString("publicationdate"));
+				books.add(rs.getString("genre"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -50,6 +52,8 @@ public class BookDAO {
 				books.add(rs.getString("name"));
 				books.add(rs.getString("writer"));
 				books.add(rs.getString("publisher"));
+				books.add(rs.getString("publicationdate"));
+				books.add(rs.getString("genre"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -70,6 +74,8 @@ public class BookDAO {
 				books.add(rs.getString("name"));
 				books.add(rs.getString("writer"));
 				books.add(rs.getString("publisher"));
+				books.add(rs.getString("publicationdate"));
+				books.add(rs.getString("genre"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

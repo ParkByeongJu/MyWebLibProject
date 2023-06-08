@@ -8,13 +8,27 @@ public class BookVO {
 	String name;
 	String writer;
 	String publisher;
-	Date receive;
+	String publicationDate;
+	String genre;
+	int hit;
 	
-	public Date getReceive() {
-		return receive;
+	public String getPublicationDate() {
+		return publicationDate;
 	}
-	public void setReceive(Date receive) {
-		this.receive = receive;
+	public void setPublicationDate(String publicationDate) {
+		this.publicationDate = publicationDate;
+	}
+	public String getGenre() {
+		return genre;
+	}
+	public void setGenre(String genre) {
+		this.genre = genre;
+	}
+	public int getHit() {
+		return hit;
+	}
+	public void setHit(int hit) {
+		this.hit = hit;
 	}
 	public int getIsbn() {
 		return isbn;
@@ -40,11 +54,11 @@ public class BookVO {
 	public void setPublisher(String publisher) {
 		this.publisher = publisher;
 	}
-	
 	@Override
 	public String toString() {
 		return "BookVO [isbn=" + isbn + ", name=" + name + ", writer=" + writer + ", publisher=" + publisher
-				+ ", receive=" + receive + "]";
+				+ ", publicationDate=" + publicationDate + ", genre=" + genre + ", hit=" + hit + "]";
 	}
-
+	
+	
 }
