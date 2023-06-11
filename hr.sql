@@ -1,10 +1,11 @@
-create table book(
-    ISBN varchar2(20) PRIMARY KEY,
-    NAME varchar2(50),
-    WRITER varchar2(50),
-    PUBLISHER varchar2(50),
-    RECEIVE date default current_date
-    );
+CREATE TABLE book (
+  isbn VARCHAR2(20) PRIMARY KEY,
+  name VARCHAR2(100),
+  writer VARCHAR2(100),
+  publisher VARCHAR2(100),
+  receive DATE,
+  rentable VARCHAR2(20)
+);
 
 commit;
 
@@ -12,8 +13,8 @@ select * from book;
 
 drop table book;
 
-INSERT INTO book(isbn, name, writer, publisher) VALUES(000001, 'ë„ì„œê´€ë§Œë“¤ì', 'ë°•ë³‘ì£¼','ì„±ë‚¨ìº ');
-INSERT INTO book(isbn, name, writer, publisher) VALUES(000002, 'ë„ì„œê´€í˜ë“¤ë‹¤', 'ë„ì„œê´€ì‹«ì€ë°•ë³‘ì£¼','ë„ì„œê´€ìˆëŠ”ì„±ë‚¨ìº ');
+INSERT INTO book (isbn, name, writer, publisher, receive, rentable) VALUES ('978-0307474279', 'µµ¼­°ü½È´Ù', '¹Úº´ÁÖ', '¼º³²Ä·', SYSDATE, '´ë¿©°¡´É');
+INSERT INTO book(isbn, name, writer, publisher, publicationdate, genre) VALUES(000002, 'µµ¼­°üÈûµé´Ù', 'µµ¼­°ü½ÈÀº¹Úº´ÁÖ','µµ¼­°üÀÖ´Â¼º³²Ä·', '2023³â06¿ù08ÀÏ', '°øÆ÷');
 
 delete from book
 where isbn = 000001;
@@ -22,17 +23,35 @@ where isbn = 000001;
 
 CREATE TABLE USERS(
     ID VARCHAR2(20) PRIMARY key,
-    PASSWORD VARCHAR2(20),
-    NAME VARCHAR2(10),
-    BIRTH VARCHAR2(30),
-    EMAIL VARCHAR2(30),
-    PHONE VARCHAR2(100),
-    ROLE VARCHAR2(5)
+    PASSWORD VARCHAR2(20)Not null,
+    NAME VARCHAR2(10)Not null,
+    BIRTH date Not null,
+    EMAIL VARCHAR2(30) Not null,
+    PHONE VARCHAR2(100) Not null,
+    ROLE VARCHAR2(5) Not null
     );
 drop table users;
+
 INSERT INTO USERS(ID, PASSWORD, NAME, BIRTH, EMAIL, PHONE, ROLE) VALUES('test', 'test', 'test', '19000101', 'test@test.com', '01012345678', 'USER');
     
 COMMIT;
 
 SELECT * FROM USERS;
 
+-------------------------------------------------------------------------------
+
+CREATE TABLE Rental (
+    ISBN varchar2 (20) PRIMARY KEY,
+    B_name varchar2(200),
+    U_ID varchar2(20),
+    rental_date date,
+    return_date date,
+    foreign key (isbn) references book(isbn),
+    foreign key (U_ID) references users(ID)
+    );
+    
+select * from rental;    
+
+drop table rental;
+
+INSERT INTO Rental(isbn, b_name, U_ID, rental_date, return_date) VALUES('1', 'µµ¼­°üÈûµé´Ù', 'bjbj', '20230609', '20230612');
