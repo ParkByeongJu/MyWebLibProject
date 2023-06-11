@@ -124,6 +124,13 @@
 		<div class="col-3">
 	      <form class="d-flex" action="bookTotalSearch.do" method="post">
 	      	<label for="total"></label>
+	      	<div class="input-group">
+		      <select class="form-select" name="searchType" id="searchType">
+		        <option value="name">제목</option>
+		        <option value="writer">저자</option>
+		        <option value="publisher">출판사</option>
+		      </select>
+		      </div>
 	        <input class="form-control me-2" type="search" name="total" id="total" placeholder="원하는 검색명을 입력해주세요." aria-label="Search">
 	        <button class="btn btn-outline-light" type="submit" value="Search"><i class="fas fa-search"></i></button>
 	      </form>

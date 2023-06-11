@@ -15,74 +15,44 @@ public class BookDAO {
 	private ResultSet rs;
 	
 	
-	private static String SEARCH_BY_NAME = "SELECT * FROM book WHERE name LIKE ?";
-	private static String SEARCH_BY_WRITER = "SELECT * FROM book WHERE writer LIKE ?";
-	private static String SEARCH_BY_PUBLISHER = "SELECT * FROM book WHERE publisher LIKE ?";
+	private static String BOOK_SEARCH = "select instr((isbn || name || writer || publisher || receive || rentable), ?)as bookh" +
+			" , isbn, name, writer, publisher, receive, rentable" +
+			" from book" +
+			" where instr((isbn || name || writer || publisher || receive || rentable), ?) != 0" +
+			" order by isbn";
 	
-	public List<String> searchName(BookVO vo){
-		List<String> books = new ArrayList<>();
-		try {
-			conn = JDBCUtil.getConnection();
-			stmt = conn.prepareStatement(SEARCH_BY_NAME);
-			stmt.setString(1, "%" + vo.getName() + "%");
-			rs = stmt.executeQuery();
-			while(rs.next()) {
-				books.add(rs.getString("name"));
-				books.add(rs.getString("writer"));
-				books.add(rs.getString("publisher"));
-				books.add(rs.getString("publicationdate"));
-				books.add(rs.getString("genre"));
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			JDBCUtil.close(rs, stmt, conn);
-		}
-		return books;
-	}
+	public List<BookVO> selectByAll(String bookinfo) {
+		List<BookVO> bookList = new ArrayList<>();
+	       
+	      try {
+	    	  conn = JDBCUtil.getConnection();
+	    	  stmt = conn.prepareStatement(BOOK_SEARCH);
+	    	  stmt.setString(1 , bookinfo);
+	    	  stmt.setString(2 , bookinfo);
+	         
+	    	  ResultSet rs = stmt.executeQuery();
+	    	  
+	         if(rs.next()) {
+	            BookVO book = new BookVO();
+	            book.setIsbn(rs.getString("ISBN"));
+				book.setName(rs.getString("NAME"));
+				book.setWriter(rs.getString("WRITER"));
+				book.setPublisher(rs.getString("PUBLISHER"));
+				book.setReceive(rs.getDate("RECEIVE"));
+				book.setRentable(rs.getString("RENTABLE"));
+				
+				bookList.add(book);
+	         }
+	         
+	         
+	      } catch (Exception e) {
+	         e.printStackTrace();
+	      } finally {
+	    	  JDBCUtil.close(rs,  stmt, conn);
+	      }
+	      return bookList;
+	   }
 	
-	public List<String> searchWriter(BookVO vo){
-		List<String> books = new ArrayList<>();
-		try {
-			conn = JDBCUtil.getConnection();
-			stmt = conn.prepareStatement(SEARCH_BY_WRITER);
-			stmt.setString(1, "%" + vo.getWriter() + "%");;
-			rs = stmt.executeQuery();
-			while(rs.next()) {
-				books.add(rs.getString("name"));
-				books.add(rs.getString("writer"));
-				books.add(rs.getString("publisher"));
-				books.add(rs.getString("publicationdate"));
-				books.add(rs.getString("genre"));
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			JDBCUtil.close(rs, stmt, conn);
-		}
-		return books;
-	}
-
-	public List<String> searchPublisher(BookVO vo){
-		List<String> books = new ArrayList<>();
-		try {
-			conn = JDBCUtil.getConnection();
-			stmt = conn.prepareStatement(SEARCH_BY_PUBLISHER);
-			stmt.setString(1, "%" + vo.getPublisher() + "%");;
-			rs = stmt.executeQuery();
-			while(rs.next()) {
-				books.add(rs.getString("name"));
-				books.add(rs.getString("writer"));
-				books.add(rs.getString("publisher"));
-				books.add(rs.getString("publicationdate"));
-				books.add(rs.getString("genre"));
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			JDBCUtil.close(rs, stmt, conn);
-		}
-		return books;
-	}
+	
 	
 }

@@ -1,98 +1,104 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>회원가입</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<title>병주도서관: 회원가입</title>
 </head>
-<body>
 <style>
-    body {
-        font-family: Arial, sans-serif;
+	body {
+			background: black;
+			margin: 0;
+			font-family: Roboto, 'Segoe UI', Arial, 'Malgun Gothic', Gulim,
+				sans-serif;
+		}
+		
+		
+	.container {
+        background: #333;
+        padding: 30px;
+        border-radius: 10px;
+        max-width: 600px;
+		position: absolute;
+		top: 40%;
+		left: 50%;
+		transform: translate(-50%, -50%);
     }
-    h1 {
-        text-align: center;
-        margin-top: 50px;
-    }
-    .form-container {
-        width: 300px;
-        margin: 0 auto;
-    }
-    .form-container input[type="text"],
-    .form-container input[type="password"],
-    .form-container input[type="email"],
-    .form-container input[type="number"],
-    .form-container input[type="submit"] {
-        padding: 5px;
-        width: 100%;
-        box-sizing: border-box;
-        margin-bottom: 10px;
-    }
-    .form-container input[type="radio"] {
-        margin-right: 5px;
-    }
-    .form-container label {
-        display: block;
-        margin-bottom: 5px;
-    }
-    .form-container input[type="submit"] {
-        background-color: #007bff;
+
+    .form-label, .text-light {
         color: #fff;
-        border: none;
-        cursor: pointer;
     }
-    .form-container input[type="submit"]:hover {
-        background-color: #0056b3;
+    
+    .btn-primary-custom {
+        background-color: #007bff;
+        border-color: #007bff;
+        color: #fff;
     }
-    .link {
-        text-align: center;
-        margin-top: 20px;
-    }
+    
+    .user-type-container label {
+	    margin-right: 30px;
+	}
+		
 </style>
-</head>
 <body>
-	<h1>회원가입</h1>
-	<div class="form-container">
-	    <form action="insertUser.do" method="post">
-    		<div>
-    			<label for="id">아이디</label>
-    			<input type="text" id="id" name="id" />
-    		</div>
-    		<div>
-    			<label for="password">비밀번호</label>
-    			<input type="password" id="password" name="password" />
-    		</div>
-    		<div>
-    			<label for="name">이름</label>
-    			<input type="text" id="name" name="name" />
-    		</div>
-    		<div>
-    			<label for="birth">생년월일</label>
-    			<input type="text" id="birth" name="birth" />
-    		</div>
-    		<div>
-    			<label for="email">Email</label>
-    			<input type="email" id="email" name="email" />
-    		</div>
-    		<div>
-    			<label for="phone">휴대폰번호</label>
-    			<input type="number" id="phone" name="phone" />
-    		</div>
-    		<div>
-    			<label>권한</label>
-    			<input type="radio" id="admin" name="role" value="admin" checked="checked" />
-    			<label for="admin">관리자</label>
-    			<input type="radio" id="user" name="role" value="User" />
-    			<label for="user">사용자</label>
-    		</div>
-    		<div>
-    			<input type="submit" value="회원가입" />
-    		</div>
-	    </form>
+	<div class="container mt-5">
+    <h1 class="text-center text-light">회원가입</h1>
+
+    <div class="row justify-content-center">
+	        <div class="col-md-6">
+	            <form action="registerProcess.do" method="post" class="mt-5">
+	                <div class="mb-3">
+	                    <label for="username" class="form-label text-light">아이디</label>
+	                    <input type="text" name="username" id="username" class="form-control" required>
+	                </div>
+	
+	                <div class="mb-3">
+	                    <label for="password" class="form-label text-light">비밀번호</label>
+	                    <input type="password" name="password" id="password" class="form-control" required>
+	                </div>
+	
+	                <div class="mb-3">
+	                    <label for="email" class="form-label text-light">이메일</label>
+	                    <input type="email" name="email" id="email" class="form-control" required>
+	                </div>
+	
+	                <div class="mb-3">
+	                    <label for="phone" class="form-label text-light">휴대폰 번호</label>
+	                    <input type="tel" name="phone" id="phone" class="form-control" required>
+	                </div>
+	
+	                <div class="mb-3">
+					    <label for="userType" class="form-label text-light">사용자 유형</label>
+					    <div class="user-type-container">
+					        <label>
+					            <input type="radio" id="admin" name="role" value="admin" checked="checked">
+					            <span class="text-white">관리자</span>
+					        </label>
+					        <label>
+					            <input type="radio" id="user" name="role" value="user">
+					            <span class="text-white">사용자</span>
+					        </label>
+					    </div>
+					</div>
+	
+	                <div class="text-center">
+	                    <button type="submit" class="btn btn-dark">가입하기</button>
+	                </div>
+	            </form>
+	
+	            <div class="text-center mt-3">
+	                <a href="login.do" class="text-light">이미 회원이신가요? 로그인하기</a>
+	            </div>
+	        </div>
+	    </div>
 	</div>
-	<div class="link">
-	    <a href="/WebMyLibProject/login.jsp">로그인</a>
-    </div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

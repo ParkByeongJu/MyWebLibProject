@@ -11,26 +11,15 @@ import controller.Controller;
 
 public class BookSearchController implements Controller{
 
-	@Override
-	public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
-		String name = request.getParameter("total");
-
-        BookVO vo = new BookVO();
-        vo.setName(name);
-        vo.setWriter(name);
-        vo.setPublisher(name);
-        vo.setPublicationDate(name);
-        vo.setGenre(name);
-
-        BookDAO dao = new BookDAO();
-        List<String> nameResults = dao.searchName(vo);
-        List<String> writerResults = dao.searchWriter(vo);
-        List<String> publisherResults = dao.searchPublisher(vo);
-
-        request.setAttribute("name", nameResults);
-        request.setAttribute("writer", writerResults);
-        request.setAttribute("publisher", publisherResults);
-
-        return "/totalSearch.jsp";
-    }
-}
+	 @Override
+	    public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
+	        String bookinfo = request.getParameter("bookinfo");
+	        
+	        BookDAO dao = new BookDAO();
+	        List<BookVO> bookList = dao.selectByAll(bookinfo);
+	        
+	        request.setAttribute("bookList", bookList);
+	        
+	        return "/totalSearch.jsp"; // 검색 결과를 표시할 JSP 페이지로 이동
+	    }
+	}
