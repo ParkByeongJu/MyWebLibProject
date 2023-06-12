@@ -101,71 +101,71 @@
     </style>
     
     <script>
-        // 아이디 유효성 검사 함수
-        function validateId() {
-            var id = $("#id").val();
-            var idRegex = /^[a-zA-Z0-9]{1,16}$/;
-            if (!idRegex.test(id)) {
-                $("#id").css("border-color", "red");
-                return false;
-            } else {
-                $("#id").css("border-color", ""); // 기존의 색상으로 복원
-                return true;
-            }
-        }
-
-        // 비밀번호 유효성 검사 함수
-        function validatePassword() {
-            var password = $("#password").val();
-            var passwordRegex = /^[a-zA-Z0-9]{1,16}$/;
-            if (!passwordRegex.test(password)) {
-                $("#password").css("border-color", "red");
-                return false;
-            } else {
-                $("#password").css("border-color", ""); // 기존의 색상으로 복원
-                return true;
-            }
-        }
-        
-        function checkSubmit() {
-            var id = $("#id").val();
-            // 유효성 검사 수행
-            if (validateId() && validatePassword()) {
-                // 유효성 검사 통과 시 AJAX 요청
-                console.log('중복 확인 시작...')
-                $.ajax({
-                    url: "/WebMyLibProject/checkduplicateid.do", // 중복 아이디 확인을 위한 서버 요청 URL
-                    method: "POST",
-                    data: {id: id}, // 폼 데이터 직렬화하여 전송
-                    success: function(response) {
-                        response = response.trim();
-                        if (response === "duplicate") {
-                        } else if (response === "success") {
-                            // 유효성 검사와 중복 아이디 확인 모두 통과 시 회원가입 진행
-                            $("#signupForm")[0].submit();
-                        }
-                    }
-                });
-            }
-            
+ // 아이디 유효성 검사 함수
+    function validateId() {
+        var id = $("#id").val();
+        var idRegex = /^[a-zA-Z0-9]{1,16}$/;
+        if (!idRegex.test(id)) {
+            $("#id").addClass("is-invalid");
             return false;
+        } else {
+            $("#id").removeClass("is-invalid");
+            return true;
         }
-        
-        $(document).ready(function() {
-            // 아이디와 비밀번호 입력 필드의 유효성 검사
-            $("#id").on("input", function() {
-                validateId();
-            });
+    }
 
-            $("#password").on("input", function() {
-                validatePassword();
-            });
+    // 비밀번호 유효성 검사 함수
+    function validatePassword() {
+        var password = $("#password").val();
+        var passwordRegex = /^[a-zA-Z0-9]{1,16}$/;
+        if (!passwordRegex.test(password)) {
+            $("#password").addClass("is-invalid");
+            return false;
+        } else {
+            $("#password").removeClass("is-invalid");
+            return true;
+        }
+    }
 
-            // 회원가입 양식 제출 시 유효성 검사
-            $("#signupForm").on("submit", function() {
-                // 기본 제출 동작 실행
+    function checkSubmit() {
+        var id = $("#id").val();
+        // 유효성 검사 수행
+        if (validateId() && validatePassword()) {
+            // 유효성 검사 통과 시 AJAX 요청
+            console.log('duplicate check start...')
+            $.ajax({
+                url: "/WebMyLibProject/checkduplicateid.do", // 중복 아이디 확인을 위한 서버 요청 URL
+                method: "POST",
+                data: {id: id}, // 폼 데이터 직렬화하여 전송
+                success: function(response) {
+                    response = response.trim();
+                    if (response === "duplicate") {
+                        alert("중복된 아이디입니다. 다른 아이디를 사용해주세요.");
+                    } else if (response === "success") {
+                        // 유효성 검사와 중복 아이디 확인 모두 통과 시 회원가입 진행
+                        $("#signupForm")[0].submit();
+                    }
+                }
             });
+        }
+        return false;
+    }
+
+    $(document).ready(function() {
+        // 아이디와 비밀번호 입력 필드의 유효성 검사
+        $("#id").on("input", function() {
+            validateId();
         });
+
+        $("#password").on("input", function() {
+            validatePassword();
+        });
+
+        // 회원가입 양식 제출 시 유효성 검사
+        $("#signupForm").on("submit", function(event) {
+            event.preventDefault(); // 기본 제출 동작 중지
+        });
+    });
     </script>
    
 

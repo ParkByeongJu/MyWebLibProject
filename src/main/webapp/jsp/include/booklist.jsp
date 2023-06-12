@@ -67,19 +67,7 @@
     <div class="container">
         <h1>전체 도서</h1>
         <hr class="text-white" />
-        <div class="book">
-            <span class="header">도서번호</span>
-            <span class="header">제목</span>
-            <span class="header">작가</span>
-            <span class="header">출판사</span>
-            <span class="header">대출여부</span>
-            <c:if test="${loginUser.type eq 'U'}">
-                <span class="header">대출하기</span>
-            </c:if>
-            <c:if test="${loginUser.type eq 'S'}">
-                <span class="header">삭제하기</span>
-            </c:if>
-        </div>
+
         <c:forEach var="book" items="${sbook}">
             <div class="book">
                 <span>${book.no}</span>

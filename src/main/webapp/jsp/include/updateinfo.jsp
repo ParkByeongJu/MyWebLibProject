@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="EUC-KR">
-    <title>회원 정보 수정</title>
+    <title>병주도서관: 회원 정보 수정</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         .form-container {

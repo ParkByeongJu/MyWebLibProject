@@ -63,10 +63,11 @@
 </div>
 <div class="container">
     <div class="custom-container">
-        <h1>내 정보</h1>
+        <h1>${user.id}(${user.name})님 정보</h1>
         <p>아이디: ${user.id}</p>
         <p>이름: ${user.name}</p>
-        <p>유형(S:관리자, U:사용자): ${user.type}</p>
+        <c:if test="${ user.type eq 'S' }">유형: 관리자</c:if>
+        <c:if test="${ user.type eq 'U' }">유형: 사용자</c:if>
         <div>
             <form action="updateinfo.do" method="POST">
                 <input type="submit" value="회원정보수정" class="btn btn-dark">
